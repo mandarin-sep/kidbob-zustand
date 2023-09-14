@@ -1,6 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import latlng from "../assets/LatLng.json";
+import { useLocationInfo } from "../store/useLocationInfo";
+import DistrictSelector from "./DistrictSelector";
 
 const LocationSelector = () => {
   const [value, setValue] = useState("");
@@ -10,6 +13,7 @@ const LocationSelector = () => {
     message: "",
   });
   const navigate = useNavigate();
+  const { updateCenter, updateDivision, updateShoptype } = useLocationInfo();
 
   const handleDataFetch = () => {
     if (value === "") {
@@ -26,11 +30,17 @@ const LocationSelector = () => {
     }
 
     //동/읍/면의 중심 좌표 설정할 함수
-    const centerValue = pickCenter(value, division);
-    const centerPosition = new naver.maps.LatLng(
-      centerValue[0],
-      centerValue[1]
+    const centerValue = latlng.filter((item) => {
+      return item.sgg_nm === value && item.emd_nm === division;
+    });
+    const centerPosition = new window.naver.maps.LatLng(
+      centerValue[0].center_lati,
+      centerValue[0].center_long
     );
+    console.log(value);
+    updateCenter(centerPosition);
+    updateDivision(division);
+    updateShoptype("");
     navigate("/main");
   };
   return (
@@ -67,7 +77,7 @@ const LocationSelector = () => {
             달성군
           </option>
         </StyledSelect>
-        <SelectBox location={value} setDivision={setDivision} />
+        <DistrictSelector location={value} setDivision={setDivision} />
         <StyledButton onClick={handleDataFetch}>찾아보기</StyledButton>
       </Container>
       {!validation.isvalidate && (
