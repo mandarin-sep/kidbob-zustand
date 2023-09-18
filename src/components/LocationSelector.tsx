@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import latlng from "../assets/LatLng.json";
 import { useLocationInfo } from "../store/useLocationInfo";
 import DistrictSelector from "./DistrictSelector";
+import { useFetchShop } from "../store/useFetchShop";
 
 const LocationSelector = () => {
   const [value, setValue] = useState("");
@@ -14,6 +15,7 @@ const LocationSelector = () => {
   });
   const navigate = useNavigate();
   const { updateCenter, updateDivision, updateShoptype } = useLocationInfo();
+  const { fetchShop } = useFetchShop();
 
   const handleDataFetch = () => {
     if (value === "") {
@@ -37,7 +39,7 @@ const LocationSelector = () => {
       centerValue[0].center_lati,
       centerValue[0].center_long
     );
-    console.log(value);
+    fetchShop(value);
     updateCenter(centerPosition);
     updateDivision(division);
     updateShoptype("");

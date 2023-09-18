@@ -43,7 +43,7 @@ export interface ApiDTO {
   };
   body: {
     items: {
-      item: listItem;
+      item: listItem[];
     };
     numOfRows: number;
     pageNo: number;
