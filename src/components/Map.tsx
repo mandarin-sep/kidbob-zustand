@@ -13,7 +13,7 @@ const Map = () => {
     const map = new naver.maps.Map("map", mapOption);
   }, []);
 
-  return <div id="map" style={{ width: "500px", height: "500px" }} />;
+  return <div id="map" style={{ width: "100%", height: "100%" }} />;
 };
 
 export default Map;

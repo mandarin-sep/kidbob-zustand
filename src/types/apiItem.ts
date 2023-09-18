@@ -35,3 +35,18 @@ export interface listItem {
   mngGoTel: string;
   insDate: string;
 }
+
+export interface ApiDTO {
+  header: {
+    resultCode: string;
+    resultMsg: string;
+  };
+  body: {
+    items: {
+      item: listItem[];
+    };
+    numOfRows: number;
+    pageNo: number;
+    totalCount: number;
+  };
+}
