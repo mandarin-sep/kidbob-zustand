@@ -1,4 +1,4 @@
-import Map from "../components/Map";
+import MapSection from "../components/MapSection";
 import FoodTypeButton from "../components/FoodTypeButton";
 import styled from "styled-components";
 import ListContainer from "../components/ListContainer";
@@ -8,7 +8,7 @@ const MainPage = () => {
     <AppContainer>
       <ListContainer />
       <MapContainer>
-        <Map />
+        <MapSection />
         <FoodTypeButton />
       </MapContainer>
     </AppContainer>
