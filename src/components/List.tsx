@@ -10,7 +10,7 @@ import Search from "./Search";
 const List = () => {
   const { division, shoptype } = useLocationInfo();
   const { shops, status } = useFetchShop();
-  const [shopList, setShopList] = useState<listItem[]>([]);
+  const [shopList, setShopList] = useState<listItem[] | undefined>(shops);
   const [filteredShopList, setFilteredShopList] = useState<listItem[]>([]);
 
   useEffect(() => {
@@ -29,7 +29,6 @@ const List = () => {
         filteredShopList.filter((shop) => shop.shopBsType === shoptype)
       );
     }
-
     if (shoptype === "all") setShopList(filteredShopList);
   }, [filteredShopList, shoptype]);
 
@@ -37,18 +36,19 @@ const List = () => {
     return <Loading />;
   }
 
+  console.log(shopList, shops, status, division, shoptype, filteredShopList);
   return (
     <>
       <Search shops={shops} />
       <StyledUl>
-        {shopList.length === 0 ? (
+        {shopList?.length === 0 ? (
           <StyledEmptyList>
             조건에 맞는 가게가 <br /> 없습니다.
           </StyledEmptyList>
         ) : (
           <></>
         )}
-        {JSON.stringify(shopList) !== "{}" ? (
+        {shopList ? (
           shopList.map((item) => {
             return <ListItem item={item} key={item.shopId} />;
           })

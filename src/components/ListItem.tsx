@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { listItem } from "../types/apiItem";
-import { useLocationInfo } from "../store/useLocationInfo";
 import { useClickedShopInfo } from "../store/useClickedShopInfo";
 import shopType from "../utils/shopType";
+import { useMap } from "../store/useMap";
 
 type ListItemPropsType = {
   item: listItem;
@@ -22,11 +22,12 @@ const ListItem = ({ item }: ListItemPropsType) => {
   } = item;
   const newCenter = new window.naver.maps.LatLng(shopLat, shopLon);
   const { updateShopInfo, updateItemClickedState } = useClickedShopInfo();
-  const { updateCenter } = useLocationInfo();
+  const { map } = useMap();
 
   //가게 정보를 클릭했을때 해당 가게를 지도의 중심으로 이동
   const handleClick = () => {
-    updateCenter(newCenter);
+    map?.setCenter(newCenter);
+    map?.setZoom(18);
     updateShopInfo({
       shopBsType,
       shopName,
