@@ -2,16 +2,8 @@ import Map from "../components/Map";
 import FoodTypeButton from "../components/FoodTypeButton";
 import styled from "styled-components";
 import ListContainer from "../components/ListContainer";
-import Loading from "../components/Loading";
-import { useFetchShop } from "../store/useFetchShop";
 
 const MainPage = () => {
-  const { status } = useFetchShop();
-
-  if (status === "Loading") {
-    return <Loading />;
-  }
-
   return (
     <AppContainer>
       <ListContainer />

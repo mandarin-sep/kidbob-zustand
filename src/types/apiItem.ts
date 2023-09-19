@@ -50,3 +50,9 @@ export interface ApiDTO {
     totalCount: number;
   };
 }
+
+export interface currentItem {
+  shopBsType: string;
+  shopName: string;
+  shopRoadAddr: string;
+}

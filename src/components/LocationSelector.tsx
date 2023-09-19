@@ -5,6 +5,7 @@ import latlng from "../assets/LatLng.json";
 import { useLocationInfo } from "../store/useLocationInfo";
 import DistrictSelector from "./DistrictSelector";
 import { useFetchShop } from "../store/useFetchShop";
+import { useMap } from "../store/useMap";
 
 const LocationSelector = () => {
   const [value, setValue] = useState("");
@@ -14,7 +15,8 @@ const LocationSelector = () => {
     message: "",
   });
   const navigate = useNavigate();
-  const { updateCenter, updateDivision, updateShoptype } = useLocationInfo();
+  const { updateDivision, updateShoptype, updateCenter } = useLocationInfo();
+  const { map } = useMap();
   const { fetchShop } = useFetchShop();
 
   const handleDataFetch = () => {
@@ -40,6 +42,8 @@ const LocationSelector = () => {
       centerValue[0].center_long
     );
     fetchShop(value);
+    map?.panTo(centerPosition);
+    map?.setZoom(16);
     updateCenter(centerPosition);
     updateDivision(division);
     updateShoptype("");

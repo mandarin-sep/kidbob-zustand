@@ -11,7 +11,7 @@ type SearchPropsType = {
 const Search = ({ shops }: SearchPropsType) => {
   const [shopName, setShopName] = useState<string>("");
   const resetList = JSON.parse(
-    sessionStorage.getItem("initList") || ""
+    sessionStorage.getItem("initListData") || ""
   ) as ApiDTO;
   const { updateShops } = useFetchShop();
 

@@ -1,17 +1,22 @@
 import { useEffect } from "react";
+import { useMap } from "../store/useMap";
+import { useLocationInfo } from "../store/useLocationInfo";
 
 const Map = () => {
+  const { updateMap } = useMap();
+  const { center } = useLocationInfo();
   useEffect(() => {
     if (!naver) return;
 
     const mapOption = {
-      center: new window.naver.maps.LatLng(37.5262411, 126.99289439),
+      center: center,
       zoom: 17,
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const map = new naver.maps.Map("map", mapOption);
-  }, []);
+
+    updateMap(map);
+  }, [updateMap, center]);
 
   return <div id="map" style={{ width: "100%", height: "100%" }} />;
 };
