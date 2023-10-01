@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { listItem } from "../types/apiItem";
-import { useClickedShopInfo } from "../store/useClickedShopInfo";
 import shopType from "../utils/shopType";
 import { useMap } from "../store/useMap";
+import { useMarker } from "../store/useMarker";
 
 type ListItemPropsType = {
   item: listItem;
@@ -19,21 +19,37 @@ const ListItem = ({ item }: ListItemPropsType) => {
     shopBsType,
     wdFrTime,
     wdToTime,
+    shopId,
   } = item;
   const newCenter = new window.naver.maps.LatLng(shopLat, shopLon);
-  const { updateShopInfo, updateItemClickedState } = useClickedShopInfo();
+
   const { map } = useMap();
+  const { markers } = useMarker();
+  const markerData = markers.find((item) => item.id === Number(shopId));
+
+  //InfoWindow Data
+  const infoWindowString = `<div style="box-sizing: border-box; padding: 8px;">
+  <div>
+  <h3 style="font-weight: 700; color: #0068c3; margin: 0 6px 0 0; line-height: 14px; display: inline;">
+  ${shopName} 
+  </h3>
+  <span style="color: #8f8f8f; font-size: 14px;">${shopType(shopBsType)}</span>
+  </div>
+  <div>${shopRoadAddr}</div>
+  </div>
+  `;
+
+  const infoWindow = new naver.maps.InfoWindow({
+    content: infoWindowString,
+  });
 
   //가게 정보를 클릭했을때 해당 가게를 지도의 중심으로 이동
   const handleClick = () => {
     map?.setCenter(newCenter);
     map?.setZoom(18);
-    updateShopInfo({
-      shopBsType,
-      shopName,
-      shopRoadAddr,
-    });
-    updateItemClickedState(true);
+    if (map) {
+      infoWindow.open(map, markerData?.marker);
+    }
   };
 
   //평일 영업시간
