@@ -36,7 +36,6 @@ const List = () => {
     return <Loading />;
   }
 
-  console.log(shopList, shops, status, division, shoptype, filteredShopList);
   return (
     <>
       <Search shops={shops} />

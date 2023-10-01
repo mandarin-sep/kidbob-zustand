@@ -1,7 +1,7 @@
 import Map from "./Map";
 import Markers from "./Markers";
 
-const MapSection = () => {
+const MapContainer = () => {
   return (
     <>
       <Map />
@@ -10,4 +10,4 @@ const MapSection = () => {
   );
 };
 
-export default MapSection;
+export default MapContainer;

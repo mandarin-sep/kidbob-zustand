@@ -1,4 +1,3 @@
-import { useCurrentShop } from "../store/useCurrentShop";
 import { useFetchShop } from "../store/useFetchShop";
 import { useLocationInfo } from "../store/useLocationInfo";
 import { useMap } from "../store/useMap";
@@ -6,7 +5,6 @@ import Marker from "./Marker";
 
 const Markers = () => {
   const { shops } = useFetchShop();
-  const { updateCurrentShop } = useCurrentShop();
   const { division } = useLocationInfo();
   const { map } = useMap();
 
@@ -22,12 +20,11 @@ const Markers = () => {
               coordinates={
                 new window.naver.maps.LatLng(store.shopLat, store.shopLon)
               }
-              onClick={() => {
-                updateCurrentShop({
-                  shopBsType: store.shopBsType,
-                  shopName: store.shopName,
-                  shopRoadAddr: store.shopRoadAddr,
-                });
+              shopData={{
+                shopId: store.shopId,
+                shopName: store.shopName,
+                shopBsType: store.shopBsType,
+                shopRoadAddr: store.shopRoadAddr,
               }}
               key={store.shopId}
             />
