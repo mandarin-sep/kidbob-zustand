@@ -1,4 +1,4 @@
-import latlng from "../assets/LatLng.json";
+import latlng from "../../public/assets/LatLng.json";
 
 export const usePickCenter = (distrinct: string, division: string) => {
   const filteredData = latlng.filter((item) => {

@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { useLocationInfo } from "../store/useLocationInfo";
-import { ReactComponent as Cafe } from "../assets/cafe.svg";
-import { ReactComponent as Pizza } from "../assets/pizza.svg";
-import { ReactComponent as Hamburger } from "../assets/hamburger.svg";
-import { ReactComponent as Hansik } from "../assets/hansik.svg";
-import { ReactComponent as Jjajangmyun } from "../assets/jjajangmyun.svg";
-import { ReactComponent as Kimbap } from "../assets/kimbap.svg";
-import { ReactComponent as Store } from "../assets/store.svg";
-import { ReactComponent as Donggga } from "../assets/dongggas.svg";
-import { ReactComponent as Dosirock } from "../assets/dosirock.svg";
+import { ReactComponent as Cafe } from "../../public/assets/cafe.svg";
+import { ReactComponent as Pizza } from "../../public/assets/pizza.svg";
+import { ReactComponent as Hamburger } from "../../public/assets/hamburger.svg";
+import { ReactComponent as Hansik } from "../../public/assets/hansik.svg";
+import { ReactComponent as Jjajangmyun } from "../../public/assets/jjajangmyun.svg";
+import { ReactComponent as Kimbap } from "../../public/assets/kimbap.svg";
+import { ReactComponent as Store } from "../../public/assets/store.svg";
+import { ReactComponent as Donggga } from "../../public/assets/dongggas.svg";
+import { ReactComponent as Dosirock } from "../../public/assets/dosirock.svg";
 
 const FoodTypeButton = () => {
   const { updateShoptype } = useLocationInfo();

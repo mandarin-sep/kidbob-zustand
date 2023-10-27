@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import latlng from "../assets/LatLng.json";
+import latlng from "../../public/assets/LatLng.json";
 import { useLocationInfo } from "../store/useLocationInfo";
 import DistrictSelector from "./DistrictSelector";
 import { useFetchShop } from "../store/useFetchShop";

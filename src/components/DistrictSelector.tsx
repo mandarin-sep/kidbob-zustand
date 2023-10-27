@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import DistrictData from "../assets/District.json";
+import DistrictData from "../../public/assets/District.json";
 
 type DistrictPropsType = {
   location: string;
