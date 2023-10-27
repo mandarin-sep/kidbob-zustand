@@ -1,19 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
-import { useFetchShop } from "../store/useFetchShop";
-import { listItem, ApiDTO } from "../types/apiItem";
+import { useSearchResult } from "../store/useSearchResult";
 
-type SearchPropsType = {
-  shops: listItem[];
-};
+interface PropsType {
+  isLoading: boolean;
+}
 
-const Search = ({ shops }: SearchPropsType) => {
+const Search = ({ isLoading }: PropsType) => {
   const [shopName, setShopName] = useState<string>("");
-  const resetList = JSON.parse(
-    sessionStorage.getItem("initListData") || ""
-  ) as ApiDTO;
-  const { updateShops } = useFetchShop();
+  const { setResult } = useSearchResult();
 
   const handleShopNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShopName(e.currentTarget.value);
@@ -24,16 +20,10 @@ const Search = ({ shops }: SearchPropsType) => {
 
     //빈창으로 검색할 경우 전체 List 보여줌
     if (shopName === "") {
-      updateShops(resetList.body.items.item);
+      setResult("");
       return;
     }
-
-    const filteredList = shops.filter((listItem) => {
-      const itemShopName = listItem.shopName;
-      return itemShopName.includes(shopName);
-    });
-
-    updateShops(filteredList);
+    setResult(shopName);
   };
 
   return (
@@ -46,6 +36,7 @@ const Search = ({ shops }: SearchPropsType) => {
           type="text"
           onChange={handleShopNameChange}
           placeholder="찾고 싶은 가게명"
+          disabled={isLoading}
         />
       </InputContainer>
     </form>

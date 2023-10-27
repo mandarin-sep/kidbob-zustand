@@ -10,7 +10,7 @@ const Map = () => {
 
     const mapOption = {
       center: center,
-      zoom: 17,
+      zoom: 16,
     };
 
     const map = new naver.maps.Map("map", mapOption);

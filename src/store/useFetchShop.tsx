@@ -11,7 +11,6 @@ type hookState = {
 
 type hookAction = {
   fetchShop: (value: string) => Promise<void>;
-  updateShops: (shops: listItem[] | undefined) => void;
 };
 
 export const useFetchShop = create(
@@ -33,7 +32,6 @@ export const useFetchShop = create(
           });
         set({ shops: response.body.items.item });
       },
-      updateShops: (shops) => set(() => ({ shops })),
     }),
     {
       name: "initListData",

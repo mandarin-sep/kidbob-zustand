@@ -52,6 +52,9 @@ const Marker = ({ map, coordinates, shopData }: MarkerPropsType): null => {
       }
     });
 
+    naver.maps.Event.addListener(map, "click", () => {
+      infoWindow.close();
+    });
     return () => {
       marker?.setMap(null);
     };

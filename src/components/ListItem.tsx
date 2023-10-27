@@ -45,10 +45,14 @@ const ListItem = ({ item }: ListItemPropsType) => {
 
   //가게 정보를 클릭했을때 해당 가게를 지도의 중심으로 이동
   const handleClick = () => {
-    map?.setCenter(newCenter);
-    map?.setZoom(18);
     if (map) {
+      map.morph(newCenter);
+      map.setZoom(18);
       infoWindow.open(map, markerData?.marker);
+
+      naver.maps.Event.addListener(map, "click", () => {
+        infoWindow.close();
+      });
     }
   };
 

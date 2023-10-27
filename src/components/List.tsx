@@ -1,56 +1,54 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Loading from "./Loading";
 import ListItem from "./ListItem";
 import { useLocationInfo } from "../store/useLocationInfo";
-import { listItem } from "../types/apiItem";
 import { useFetchShop } from "../store/useFetchShop";
 import Search from "./Search";
+import { useSearchResult } from "../store/useSearchResult";
 
 const List = () => {
   const { division, shoptype } = useLocationInfo();
   const { shops, status } = useFetchShop();
-  const [shopList, setShopList] = useState<listItem[] | undefined>(shops);
-  const [filteredShopList, setFilteredShopList] = useState<listItem[]>([]);
+  const { result } = useSearchResult();
 
-  useEffect(() => {
-    if (shops) {
-      const filteredList = shops.filter(
-        (item) => item.shopAddr.split(" ")[0] === division
-      );
-      setShopList(filteredList);
-      setFilteredShopList(filteredList);
-    }
-  }, [division, shops]);
+  const newShops =
+    shoptype === "all" || !shoptype
+      ? shops
+      : shops?.filter((item) => item.shopBsType === shoptype);
 
-  useEffect(() => {
-    if (shoptype !== "") {
-      setShopList(
-        filteredShopList.filter((shop) => shop.shopBsType === shoptype)
-      );
-    }
-    if (shoptype === "all") setShopList(filteredShopList);
-  }, [filteredShopList, shoptype]);
+  const searchedShopList =
+    result === "" || !result
+      ? newShops
+      : newShops?.filter((item) => item.shopName.includes(result));
 
-  if (status === "Loading" || !shops) {
-    return <Loading />;
+  if (status !== "Succecs" || !shops) {
+    return (
+      <>
+        <Search isLoading={true} />
+        <Loading />
+      </>
+    );
   }
 
   return (
     <>
-      <Search shops={shops} />
+      <Search isLoading={false} />
       <StyledUl>
-        {shopList?.length === 0 ? (
+        {searchedShopList?.filter(
+          (item) => item.shopAddr.split(" ")[0] === division
+        ).length === 0 ? (
           <StyledEmptyList>
             조건에 맞는 가게가 <br /> 없습니다.
           </StyledEmptyList>
         ) : (
           <></>
         )}
-        {shopList ? (
-          shopList.map((item) => {
-            return <ListItem item={item} key={item.shopId} />;
-          })
+        {searchedShopList ? (
+          searchedShopList
+            .filter((item) => item.shopAddr.split(" ")[0] === division)
+            .map((item) => {
+              return <ListItem item={item} key={item.shopId} />;
+            })
         ) : (
           <Loading />
         )}
