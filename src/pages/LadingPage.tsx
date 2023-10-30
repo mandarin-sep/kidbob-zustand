@@ -4,7 +4,7 @@ import LocationSelector from "../components/LocationSelector";
 const LandingPage = () => {
   return (
     <PageContainer>
-      <MainBadge src="/assets/Symbol_of_Daegu.svg" />
+      <MainBadge src="/assets/Symbol_of_Daegu.svg" alt="대구 광역시 뱃지" />
       <MainName>대구 광역시 아동급식카드 사용처</MainName>
       <ZoneSelectorContainer>
         <LocationSelector />
@@ -44,7 +44,7 @@ const PageContainer = styled.div`
   flex-direction: column;
   &::before {
     content: "";
-    background: url(/assets/DaeguMap.png) no-repeat center;
+    background: url(/assets/DaeguMap.webp) no-repeat center;
     background-size: cover;
     opacity: 0.3;
     position: absolute;

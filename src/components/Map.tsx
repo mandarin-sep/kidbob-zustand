@@ -18,7 +18,11 @@ const Map = () => {
     updateMap(map);
   }, [updateMap, center]);
 
-  return <div id="map" style={{ width: "100%", height: "100%" }} />;
+  return (
+    <>
+      <div id="map" style={{ width: "100%", height: "100%" }} />
+    </>
+  );
 };
 
 export default Map;

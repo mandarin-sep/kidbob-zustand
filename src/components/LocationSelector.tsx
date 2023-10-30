@@ -56,6 +56,7 @@ const LocationSelector = () => {
           name="area"
           id="area-select"
           onChange={(e) => setValue(e.target.value)}
+          aria-label="행정구역 선택"
         >
           <option value="">찾고 싶은 행정구역을 선택해주세요</option>
           <option value="북구" id="BukGu">
